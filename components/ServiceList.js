@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     padding: 2,
     fontWeight: 'bold',
+    fontSize: 18,
   },
   list: {
     margin: 10,
@@ -141,5 +142,6 @@ const styles = StyleSheet.create({
     borderColor: '#aaa',
     borderWidth: 1.5,
     margin: 18,
+    fontSize: 17,
   },
 });
