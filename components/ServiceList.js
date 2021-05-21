@@ -43,6 +43,7 @@ export default function ServiceList() {
               <View>
                 <Text style={styles.listItem}>
                   <Pressable
+                    hitSlop={20}
                     onPress={() => {
                       setVisibleModal(!visibleModal);
                       setClickedData(item);
@@ -61,13 +62,20 @@ export default function ServiceList() {
             animationType="slide"
             onRequestClose={() => setVisibleModal(!visibleModal)}>
             <View style={styles.modalBox}>
-              <Text>
+              <Text style={styles.modalText}>
                 Proposal Internal Code:
                 {clickedData.id}
               </Text>
-              <Text>Customer Name:{clickedData.customer}</Text>
-              <Text>Seller Name: {clickedData.seller}</Text>
-              <Text>Description:{clickedData.description}</Text>
+              <Text style={styles.modalText}>
+                Customer Name:{clickedData.customer}
+              </Text>
+              <Text style={styles.modalText}>
+                Seller Name: {clickedData.seller}
+              </Text>
+              <Text style={styles.modalText}>
+                Description:{clickedData.description}
+              </Text>
+              <Text style={styles.modalText}>Value:{clickedData.value}</Text>
               <Button
                 title="Close modal"
                 onPress={() => setVisibleModal(!visibleModal)}
@@ -89,7 +97,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginBottom: 20,
     padding: 20,
-    backgroundColor: '#abab',
+    backgroundColor: '#e3e3e3',
     flexGrow: 1,
   },
   title: {
@@ -112,6 +120,11 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  modalText: {
+    marginBottom: 5,
+    padding: 2,
+    fontWeight: 'bold',
+  },
   list: {
     margin: 10,
     alignContent: 'space-around',
@@ -124,7 +137,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 15,
     marginBottom: 10,
-    borderRadius: 4,
+    borderRadius: 20,
     borderColor: '#aaa',
     borderWidth: 1.5,
     margin: 18,
