@@ -8,11 +8,16 @@ import {
   StyleSheet,
   Pressable,
   Alert,
+  Modal,
+  Button,
 } from 'react-native';
+import CustomModal from './CustomModal';
 
 export default function ServiceList() {
   const [isLoading, setLoading] = useState(true);
   const [dataSource, setData] = useState([]);
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [clickedData, setClickedData] = useState([]);
 
   useEffect(() => {
     fetch('https://my-json-server.typicode.com/codificar/oficina/proposals')
@@ -38,7 +43,10 @@ export default function ServiceList() {
               <View>
                 <Text style={styles.listItem}>
                   <Pressable
-                    onPress={() => Alert.alert('this data was pressed')}>
+                    onPress={() => {
+                      setVisibleModal(!visibleModal);
+                      setClickedData(item);
+                    }}>
                     <Text> Customer {item.customer} </Text>
                     <Text> Seller: {item.seller} </Text>
                     <Text> Value: {item.value} </Text>
@@ -47,6 +55,25 @@ export default function ServiceList() {
               </View>
             )}
           />
+          <Modal
+            visible={visibleModal}
+            transparent={true}
+            animationType="slide"
+            onRequestClose={() => setVisibleModal(!visibleModal)}>
+            <View style={styles.modalBox}>
+              <Text>
+                Proposal Internal Code:
+                {clickedData.id}
+              </Text>
+              <Text>Customer Name:{clickedData.customer}</Text>
+              <Text>Seller Name: {clickedData.seller}</Text>
+              <Text>Description:{clickedData.description}</Text>
+              <Button
+                title="Close modal"
+                onPress={() => setVisibleModal(!visibleModal)}
+              />
+            </View>
+          </Modal>
         </View>
       )}
     </View>
@@ -69,7 +96,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 30,
   },
-  modal: {
+  modalBox: {
     alignContent: 'center',
     margin: 20,
     backgroundColor: 'white',
