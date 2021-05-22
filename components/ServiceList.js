@@ -7,16 +7,13 @@ import {
   FlatList,
   StyleSheet,
   Pressable,
-  Alert,
-  Modal,
-  Button,
 } from 'react-native';
 import CustomModal from './CustomModal';
 
 export default function ServiceList() {
   const [isLoading, setLoading] = useState(true);
   const [dataSource, setData] = useState([]);
-  const [visibleModal, setVisibleModal] = useState(false);
+  const [visibleModalIsTrue, setVisibleModal] = useState(false);
   const [clickedData, setClickedData] = useState([]);
 
   useEffect(() => {
@@ -26,7 +23,10 @@ export default function ServiceList() {
       .catch(error => console.error(error))
       .finally(() => setLoading(false));
   }, []);
-  //TODO:TRY TO SPLIT THE CONCERNS VIA CONTEXT
+
+  const handleModalClose = () => {
+    setVisibleModal(!visibleModalIsTrue);
+  };
 
   return (
     <View style={styles.container}>
@@ -46,7 +46,7 @@ export default function ServiceList() {
                   <Pressable
                     hitSlop={20}
                     onPress={() => {
-                      setVisibleModal(!visibleModal);
+                      setVisibleModal(!visibleModalIsTrue);
                       setClickedData(item);
                     }}>
                     <Text> Customer {item.customer} </Text>
@@ -57,34 +57,18 @@ export default function ServiceList() {
               </View>
             )}
           />
-          <Modal
-            visible={visibleModal}
-            transparent={true}
-            animationType="slide"
-            onRequestClose={() => setVisibleModal(!visibleModal)}>
-            <View style={styles.modalBox}>
-              <Text style={styles.modalText}>
-                Proposal Internal Code:
-                {clickedData.id}
-              </Text>
-              <Text style={styles.modalText}>
-                Customer Name:{clickedData.customer}
-              </Text>
-              <Text style={styles.modalText}>
-                Seller Name: {clickedData.seller}
-              </Text>
-              <Text style={styles.modalText}>
-                Description:{clickedData.description}
-              </Text>
-              <Text style={styles.modalText}>Value:{clickedData.value}</Text>
-              <Button
-                style={styles.modalButton}
-                title="Close modal"
-                onPress={() => setVisibleModal(!visibleModal)}
-              />
-            </View>
-          </Modal>
         </View>
+      )}
+      {visibleModalIsTrue ? (
+        <View style={styles.modalWrapper}>
+          <CustomModal
+            closeModal={handleModalClose}
+            isVisible={visibleModalIsTrue}
+            selectedItem={clickedData}
+          />
+        </View>
+      ) : (
+        <View />
       )}
     </View>
   );
@@ -107,36 +91,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     alignSelf: 'center',
     alignContent: 'center',
-    color: '#1f75ff',
-  },
-  modalBox: {
-    flexDirection: 'column',
-    alignContent: 'center',
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 10,
-    backfaceVisibility: 'hidden',
-  },
-  modalText: {
-    alignContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
-    marginBottom: 5,
-    padding: 2,
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-  modalButton: {
     color: '#1f75ff',
   },
   list: {
@@ -164,17 +118,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.39,
     shadowRadius: 8.3,
     elevation: 1,
-    // shadowColor: '#000',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 3,
-    // },
-    // shadowOpacity: 0.29,
-    // shadowRadius: 4.65,
-
-    // elevation: 7,
     margin: 18,
     fontSize: 17,
   },
+  modalWrapper: {
+    alignSelf: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+  },
 });
-//TODO:card shadow, modal to center,
