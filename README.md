@@ -23,11 +23,17 @@ There were no external dependencies used in this project, the only ones used wer
 
 # How to run the App
 1- Set up the developing enviroment as per the react-native instructions as provided in this link:[React-Native Docs: Setting up the development environment](https://reactnative.dev/docs/environment-setup)
+
 2- Make sure an Android Virtual Device is properly running and set up
+
 3- Create a 5.4in virtual device on the AVD Manager in Android Studio, using the android version and APIs instructed by the react-native docs.
+
 3- Clone this Repo in this link: [Repo Main Page](https://github.com/jrxcjr/oficinamecapp)
+
 4- Open the Terminal in the desired IDE(Android Studio or VSCode are the recommended ones) 
+
 5- Type up the command: "npx react-native run-android", if the emulator was properly set up, you must await about 2 minutes for the first startup of the app
+
 6- After the compiling and running, the app will be running on the screen of the emulator.
 
 # Found any bugs?
