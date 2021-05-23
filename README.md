@@ -22,7 +22,8 @@ The code splitting pattern in this project was the one recommended by React, spl
 There were no external dependencies used in this project, the only ones used were the ones brought by the React-Native Init
 
 # How to run the App
-1- Set up the developing enviroment as per the react-native instructions as provided in this link:[React-Native Docs: Setting up the development environment](https://reactnative.dev/docs/environment-setup)
+1- Set up the developing enviroment as per the react-native instructions as provided in this link:
+[React-Native Docs: Setting up the development environment](https://reactnative.dev/docs/environment-setup)
 
 2- Make sure an Android Virtual Device is properly running and set up
 
