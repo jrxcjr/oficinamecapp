@@ -13,7 +13,7 @@ The biggest puzzle of this project was to properly manage the flow of data betwe
 Not every Edge Case was tested and prevented because of time constraints.
 
 # Project Goal
-This project was created as an assignment to a job offer in the Codificar company.
+This project was created as an assignment to a job offer in the Codificar company using a lightweight ui for metting the criteria established by the assignment pdf
 
 # Code Splitting
 The code splitting pattern in this project was the one recommended by React, splitting the code into components, in place of a monolithic approach, granting them better separation of concerns between each other. 
